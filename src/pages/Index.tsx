@@ -8,7 +8,6 @@ import ReviewSection from "@/components/dashboard/ReviewSection";
 
 const tabs = [
   { id: "menu", label: "Menu", icon: UtensilsCrossed },
-  { id: "cart", label: "Cart", icon: ShoppingCart },
   { id: "payment", label: "Payment", icon: CreditCard },
   { id: "orders", label: "Orders", icon: Package },
   { id: "reviews", label: "Reviews", icon: Star },
