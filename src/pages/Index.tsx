@@ -1,22 +1,20 @@
-import { UtensilsCrossed, ShoppingCart, CreditCard, Package, Star } from "lucide-react";
+import { UtensilsCrossed, CreditCard, Package, Star } from "lucide-react";
 import { OrderProvider, useOrder } from "@/context/OrderContext";
 import Header from "@/components/dashboard/Header";
 import MenuSection from "@/components/dashboard/MenuSection";
-import CartSection from "@/components/dashboard/CartSection";
 import PaymentSection from "@/components/dashboard/PaymentSection";
 import OrdersSection from "@/components/dashboard/OrdersSection";
 import ReviewSection from "@/components/dashboard/ReviewSection";
 
 const tabs = [
   { id: "menu", label: "Menu", icon: UtensilsCrossed },
-  { id: "cart", label: "Cart", icon: ShoppingCart },
   { id: "payment", label: "Payment", icon: CreditCard },
   { id: "orders", label: "Orders", icon: Package },
   { id: "reviews", label: "Reviews", icon: Star },
 ];
 
 const DashboardContent = () => {
-  const { activeTab, setActiveTab, cart } = useOrder();
+  const { activeTab, setActiveTab } = useOrder();
 
   return (
     <div className="min-h-screen bg-background">
@@ -37,20 +35,12 @@ const DashboardContent = () => {
               >
                 <tab.icon className="h-4 w-4" />
                 {tab.label}
-                {tab.id === "cart" && cart.length > 0 && (
-                  <span className={`ml-1 flex h-5 w-5 items-center justify-center rounded-full text-xs ${
-                    isActive ? "bg-primary-foreground/20 text-primary-foreground" : "bg-primary/10 text-primary"
-                  }`}>
-                    {cart.reduce((s, i) => s + i.quantity, 0)}
-                  </span>
-                )}
               </button>
             );
           })}
         </nav>
 
         {activeTab === "menu" && <MenuSection />}
-        {activeTab === "cart" && <CartSection />}
         {activeTab === "payment" && <PaymentSection />}
         {activeTab === "orders" && <OrdersSection />}
         {activeTab === "reviews" && <ReviewSection />}
