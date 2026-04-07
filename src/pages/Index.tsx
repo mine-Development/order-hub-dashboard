@@ -1,8 +1,7 @@
-import { UtensilsCrossed, ShoppingCart, CreditCard, Package, Star } from "lucide-react";
+import { UtensilsCrossed, CreditCard, Package, Star } from "lucide-react";
 import { OrderProvider, useOrder } from "@/context/OrderContext";
 import Header from "@/components/dashboard/Header";
 import MenuSection from "@/components/dashboard/MenuSection";
-import CartSection from "@/components/dashboard/CartSection";
 import PaymentSection from "@/components/dashboard/PaymentSection";
 import OrdersSection from "@/components/dashboard/OrdersSection";
 import ReviewSection from "@/components/dashboard/ReviewSection";
