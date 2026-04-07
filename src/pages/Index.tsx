@@ -7,7 +7,7 @@ import EventBooking from "@/components/booking/EventBooking";
 import MyBookings from "@/components/booking/MyBookings";
 import { eventCategories } from "@/data/events";
 
-type View = "home" | "booking" | "my-bookings";
+type View = "home" | "booking" | "my-bookings" | "about" | "contact";
 
 const DashboardContent = () => {
   const [view, setView] = useState<View>("home");
@@ -31,7 +31,12 @@ const DashboardContent = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onViewBookings={() => setView("my-bookings")} onHome={() => setView("home")} />
+      <Header
+        onViewBookings={() => setView("my-bookings")}
+        onHome={() => setView("home")}
+        onAbout={() => { setView("about"); window.scrollTo(0, 0); }}
+        onContact={() => { setView("contact"); window.scrollTo(0, 0); }}
+      />
 
       {view === "home" && (
         <>
@@ -52,6 +57,10 @@ const DashboardContent = () => {
       )}
 
       {view === "my-bookings" && <MyBookings />}
+
+      {view === "about" && <AboutPage />}
+
+      {view === "contact" && <ContactPage />}
 
       <footer className="border-t border-border bg-card py-8">
         <div className="container text-center text-sm text-muted-foreground">
