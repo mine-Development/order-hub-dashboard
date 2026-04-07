@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from "react";
-import { Booking } from "@/types/booking";
+import type { Booking } from "@/types/booking";
 
 interface BookingContextType {
   bookings: Booking[];
