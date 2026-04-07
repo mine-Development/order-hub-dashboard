@@ -5,6 +5,8 @@ import HeroSection from "@/components/landing/HeroSection";
 import EventCategoryGrid from "@/components/landing/EventCategoryGrid";
 import EventBooking from "@/components/booking/EventBooking";
 import MyBookings from "@/components/booking/MyBookings";
+import AboutPage from "@/components/pages/AboutPage";
+import ContactPage from "@/components/pages/ContactPage";
 import { eventCategories } from "@/data/events";
 
 type View = "home" | "booking" | "my-bookings" | "about" | "contact";
