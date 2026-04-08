@@ -21,8 +21,8 @@ const MyBookings = () => {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
 
-  const handleReview = (id: string) => {
-    reviewBooking(id, rating, comment);
+  const handleReview = async (id: string) => {
+    await reviewBooking(id, rating, comment);
     setReviewingId(null);
     setComment("");
     setRating(5);
@@ -78,7 +78,7 @@ const MyBookings = () => {
 
               <div className="mt-4 flex flex-wrap gap-2">
                 {booking.status === "pending" && (
-                  <Button variant="destructive" size="sm" onClick={() => { cancelBooking(booking.id); toast.info("Booking cancelled"); }}>
+                  <Button variant="destructive" size="sm" onClick={async () => { await cancelBooking(booking.id); toast.info("Booking cancelled"); }}>
                     Cancel Booking
                   </Button>
                 )}
