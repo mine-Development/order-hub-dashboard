@@ -54,10 +54,6 @@ const Admin = () => {
   const [contacts, setContacts] = useState<ContactRow[]>([]);
   const [loading, setLoading] = useState(true);
 
-  if (!authenticated) {
-    return <AdminLogin onLogin={() => setAuthenticated(true)} />;
-  }
-
   const fetchData = async () => {
     setLoading(true);
     const [bRes, cRes] = await Promise.all([
@@ -69,7 +65,11 @@ const Admin = () => {
     setLoading(false);
   };
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => { if (authenticated) fetchData(); }, [authenticated]);
+
+  if (!authenticated) {
+    return <AdminLogin onLogin={() => setAuthenticated(true)} />;
+  }
 
   const updateStatus = async (id: string, status: string) => {
     const { error } = await supabase.from("bookings").update({ status }).eq("id", id);
