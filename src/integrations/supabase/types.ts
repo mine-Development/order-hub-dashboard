@@ -14,7 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          created_at: string
+          customer_email: string | null
+          customer_name: string
+          customer_phone: string
+          date: string
+          event_category_id: string
+          event_name: string
+          event_type_id: string
+          guest_count: number
+          id: string
+          notes: string | null
+          package_id: string
+          package_name: string
+          review_comment: string | null
+          review_rating: number | null
+          reviewed: boolean
+          status: string
+          total_amount: number
+          updated_at: string
+          venue: string
+        }
+        Insert: {
+          created_at?: string
+          customer_email?: string | null
+          customer_name: string
+          customer_phone: string
+          date: string
+          event_category_id: string
+          event_name: string
+          event_type_id: string
+          guest_count: number
+          id?: string
+          notes?: string | null
+          package_id: string
+          package_name: string
+          review_comment?: string | null
+          review_rating?: number | null
+          reviewed?: boolean
+          status?: string
+          total_amount: number
+          updated_at?: string
+          venue: string
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string | null
+          customer_name?: string
+          customer_phone?: string
+          date?: string
+          event_category_id?: string
+          event_name?: string
+          event_type_id?: string
+          guest_count?: number
+          id?: string
+          notes?: string | null
+          package_id?: string
+          package_name?: string
+          review_comment?: string | null
+          review_rating?: number | null
+          reviewed?: boolean
+          status?: string
+          total_amount?: number
+          updated_at?: string
+          venue?: string
+        }
+        Relationships: []
+      }
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          is_read: boolean
+          message: string
+          name: string
+          phone: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          is_read?: boolean
+          message: string
+          name: string
+          phone?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          name?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
