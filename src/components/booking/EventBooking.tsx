@@ -35,28 +35,36 @@ const EventBooking = ({ event, categoryId, onBack, onBooked }: EventBookingProps
 
   const total = selectedPkg ? selectedPkg.pricePerPlate * guestCount : 0;
 
-  const handleSubmit = () => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
     if (!selectedPkg || !date || !name || !phone || !venue) {
       toast.error("Please fill all required fields");
       return;
     }
-    addBooking({
-      eventCategoryId: categoryId,
-      eventTypeId: event.id,
-      eventName: event.name,
-      packageId: selectedPkg.id,
-      packageName: selectedPkg.name,
-      date: date.toISOString(),
-      guestCount,
-      totalAmount: total,
-      customerName: name,
-      customerPhone: phone,
-      customerEmail: email,
-      venue,
-      notes,
-    });
-    toast.success("Booking request submitted successfully!");
-    onBooked();
+    setSubmitting(true);
+    try {
+      await addBooking({
+        eventCategoryId: categoryId,
+        eventTypeId: event.id,
+        eventName: event.name,
+        packageId: selectedPkg.id,
+        packageName: selectedPkg.name,
+        date: date.toISOString(),
+        guestCount,
+        totalAmount: total,
+        customerName: name,
+        customerPhone: phone,
+        customerEmail: email,
+        venue,
+        notes,
+      });
+      toast.success("Booking request submitted successfully!");
+      onBooked();
+    } catch {
+      toast.error("Failed to submit booking. Please try again.");
+    }
+    setSubmitting(false);
   };
 
   return (

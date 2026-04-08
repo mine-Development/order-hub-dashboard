@@ -21,8 +21,8 @@ const MyBookings = () => {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
 
-  const handleReview = (id: string) => {
-    reviewBooking(id, rating, comment);
+  const handleReview = async (id: string) => {
+    await reviewBooking(id, rating, comment);
     setReviewingId(null);
     setComment("");
     setRating(5);
