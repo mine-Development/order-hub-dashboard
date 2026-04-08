@@ -4,13 +4,27 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactPage = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    const { error } = await supabase.from("contact_messages").insert({
+      name: form.name,
+      email: form.email,
+      phone: form.phone || null,
+      message: form.message,
+    });
+    setSubmitting(false);
+    if (error) {
+      toast({ title: "Error", description: "Failed to send message. Please try again.", variant: "destructive" });
+      return;
+    }
     toast({ title: "Message Sent!", description: "We'll get back to you within 24 hours." });
     setForm({ name: "", email: "", phone: "", message: "" });
   };
@@ -52,7 +66,9 @@ const ContactPage = () => {
           <Input type="email" placeholder="Email Address" required value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
           <Input type="tel" placeholder="Phone Number" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
           <Textarea placeholder="Your Message" required rows={4} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
-          <Button type="submit" className="w-full">Send Message</Button>
+          <Button type="submit" className="w-full" disabled={submitting}>
+            {submitting ? "Sending..." : "Send Message"}
+          </Button>
         </form>
       </div>
     </section>
