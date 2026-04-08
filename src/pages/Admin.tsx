@@ -48,9 +48,14 @@ const statusColors: Record<string, string> = {
 };
 
 const Admin = () => {
+  const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem("fooddash_admin") === "true");
   const [bookings, setBookings] = useState<BookingRow[]>([]);
   const [contacts, setContacts] = useState<ContactRow[]>([]);
   const [loading, setLoading] = useState(true);
+
+  if (!authenticated) {
+    return <AdminLogin onLogin={() => setAuthenticated(true)} />;
+  }
 
   const fetchData = async () => {
     setLoading(true);
