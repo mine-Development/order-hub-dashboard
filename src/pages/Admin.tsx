@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChefHat, CalendarDays, Users, Mail, Phone, MapPin, MessageSquare, RefreshCw, Eye } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import AdminLogin from "@/components/admin/AdminLogin";
 
 interface BookingRow {
   id: string;
