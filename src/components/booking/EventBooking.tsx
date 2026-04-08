@@ -237,8 +237,8 @@ const EventBooking = ({ event, categoryId, onBack, onBooked }: EventBookingProps
                   <Button variant="outline" onClick={() => setStep("package")} className="rounded-full">
                     Change Package
                   </Button>
-                  <Button onClick={handleSubmit} className="flex-1 rounded-full">
-                    Submit Booking
+                  <Button onClick={handleSubmit} className="flex-1 rounded-full" disabled={submitting}>
+                    {submitting ? "Submitting..." : "Submit Booking"}
                   </Button>
                 </div>
               </CardContent>

@@ -78,7 +78,7 @@ const MyBookings = () => {
 
               <div className="mt-4 flex flex-wrap gap-2">
                 {booking.status === "pending" && (
-                  <Button variant="destructive" size="sm" onClick={() => { cancelBooking(booking.id); toast.info("Booking cancelled"); }}>
+                  <Button variant="destructive" size="sm" onClick={async () => { await cancelBooking(booking.id); toast.info("Booking cancelled"); }}>
                     Cancel Booking
                   </Button>
                 )}
