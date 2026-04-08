@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChefHat, CalendarDays, Users, Mail, Phone, MapPin, MessageSquare, RefreshCw, Eye } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import AdminLogin from "@/components/admin/AdminLogin";
 
 interface BookingRow {
   id: string;
@@ -48,6 +49,7 @@ const statusColors: Record<string, string> = {
 };
 
 const Admin = () => {
+  const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem("fooddash_admin") === "true");
   const [bookings, setBookings] = useState<BookingRow[]>([]);
   const [contacts, setContacts] = useState<ContactRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -63,7 +65,11 @@ const Admin = () => {
     setLoading(false);
   };
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => { if (authenticated) fetchData(); }, [authenticated]);
+
+  if (!authenticated) {
+    return <AdminLogin onLogin={() => setAuthenticated(true)} />;
+  }
 
   const updateStatus = async (id: string, status: string) => {
     const { error } = await supabase.from("bookings").update({ status }).eq("id", id);
